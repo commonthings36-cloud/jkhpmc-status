@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JKHPMC Website — Delivery Status</title>
+<meta name="description" content="Delivery status of the JKHPMC website: what is built, what is pending, and what we need from JKHPMC.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <strong class="brand">JKHPMC Website <span>Delivery Status</span></strong>
+    <nav aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#frontend">Frontend</a>
+      <a href="#backend">Backend</a>
+      <a href="#dependencies">Dependencies</a>
+      <a href="#risks">Risks</a>
+      <a href="#milestones">Milestones</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section id="overview" class="hero">
+    <p class="eyebrow">Status as of <span id="auditDate"></span></p>
+    <h1>JKHPMC Official Website — Delivery Status</h1>
+    <p class="lead">The visible website is built as a working prototype with <strong>sample content</strong>. The server side (database, logins, content management, forms that really send) has <strong>not been started</strong>. Nothing yet works with real data from end to end.</p>
+    <div class="split">
+      <div class="panel good"><h2>Frontend (what visitors see)</h2><p id="feSummary"></p><div id="feBar" class="stack" role="img"></div><ul class="legend" id="feLegend"></ul></div>
+      <div class="panel warn"><h2>Backend (what makes it real)</h2><p id="beSummary"></p><div id="beBar" class="stack" role="img"></div><ul class="legend" id="beLegend"></ul></div>
+    </div>
+    <p class="note">Bars and counts are simple tallies of the items listed below. They are not a measure of effort or percentage complete.</p>
+  </section>
+
+  <section aria-labelledby="chk">
+    <h2 id="chk">What has been checked on the frontend</h2>
+    <div class="grid checks" id="checks"></div>
+    <p class="note">These checks show the prototype is internally consistent. They do not confirm real data, the backend, WCAG 2.1 AA, GIGW or CERT-In compliance.</p>
+  </section>
+
+  <section aria-labelledby="prog">
+    <h2 id="prog">Progress by priority</h2>
+    <div class="grid prio" id="prio"></div>
+    <details class="legend-box"><summary>What do the statuses mean?</summary>
+      <dl>
+        <dt><span class="badge s-done">Completed</span></dt><dd>Built and verified in the existing tests.</dd>
+        <dt><span class="badge s-progress">In Progress</span></dt><dd>Partly built; for example the screen exists but uses sample data.</dd>
+        <dt><span class="badge s-pending">Pending</span></dt><dd>Not started.</dd>
+        <dt><span class="badge s-client">Client Dependency</span></dt><dd>Cannot proceed until JKHPMC supplies content, an account, a decision or approval.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="filters" aria-label="Filters">
+    <div class="search"><label for="q">Search features</label><input id="q" type="search" placeholder="e.g. tender, login, map…"></div>
+    <div><span class="flabel">Priority</span><div class="chips" id="fp" role="group" aria-label="Priority filter"></div></div>
+    <div><span class="flabel">Status</span><div class="chips" id="fs" role="group" aria-label="Status filter"></div></div>
+    <p id="count" class="count" aria-live="polite"></p>
+  </section>
+
+  <section id="frontend" aria-labelledby="fe-h">
+    <h2 id="fe-h">Frontend — website screens <span class="tag fe">Built so far</span></h2>
+    <p class="sub">What visitors and staff see. Completed items are verified; "In Progress" items work on sample data only.</p>
+    <div id="feList"></div>
+  </section>
+
+  <section id="backend" aria-labelledby="be-h">
+    <h2 id="be-h">Backend — server-side development <span class="tag be">Not started</span></h2>
+    <p class="sub">Data storage, secure logins, content management, forms that really send, notifications and go-live operations. Go-live operations (hosting, backups, security and accessibility audits, handover) are shown as P1 because the SOW go-live criteria require them.</p>
+    <div id="beList"></div>
+  </section>
+
+  <section id="dependencies" aria-labelledby="dep-h">
+    <h2 id="dep-h">What we need from JKHPMC</h2>
+    <div class="table-wrap"><table><thead><tr><th>Needed</th><th>What it unblocks</th><th>Risk if late</th></tr></thead><tbody id="depBody"></tbody></table></div>
+    <h3>Decisions and approvals required</h3>
+    <ul class="checklist" id="appr"></ul>
+  </section>
+
+  <section id="risks" aria-labelledby="risk-h">
+    <h2 id="risk-h">Risks</h2>
+    <div class="grid risks" id="riskList"></div>
+  </section>
+
+  <section id="milestones" aria-labelledby="ms-h">
+    <h2 id="ms-h">Upcoming milestones</h2>
+    <p class="sub">Dates are not shown because none have been agreed. Milestones are in recommended order.</p>
+    <ol class="timeline" id="msList"></ol>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap">Source: project audit &amp; backend roadmap, <span id="auditDate2"></span>. Every item and number on this page comes from that audit.</div></footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
