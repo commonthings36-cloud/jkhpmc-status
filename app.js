@@ -11,6 +11,7 @@
   function tally(list) { var t = { done: 0, progress: 0, client: 0, pending: 0 }; list.forEach(function (f) { t[f.status]++; }); return t; }
 
   $('auditDate').textContent = S.auditDate;
+  $('updated').textContent = S.updated;
   $('auditDate2').textContent = S.auditDate;
 
   function summary(listEl, barEl, textEl, list, label) {
@@ -106,6 +107,9 @@
   window.DEPENDENCIES.forEach(function (d) {
     var tr = el('tr', null, '<td data-l="Needed">' + esc(d[0]) + '</td><td data-l="Unblocks">' + esc(d[1]) + '</td><td data-l="Risk if late">' + esc(d[2] || '—') + '</td>');
     $('depBody').appendChild(tr);
+  });
+  window.HISTORY.forEach(function (h) {
+    $('logBody').appendChild(el('tr', null, '<td data-l="Date">' + h.date + '</td><td><b>' + esc(h.task) + '</b></td><td><span class="pchip p-' + h.p + '">' + h.p + '</span></td><td>' + badge(h.status) + '</td><td>' + esc(h.what) + '</td><td>' + esc(h.verified) + '</td><td>' + esc(h.remaining || '—') + '</td>'));
   });
   window.APPROVALS.forEach(function (a) { $('appr').appendChild(el('li', null, esc(a))); });
   window.RISKS.forEach(function (r) {

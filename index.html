@@ -19,13 +19,14 @@
       <a href="#dependencies">Dependencies</a>
       <a href="#risks">Risks</a>
       <a href="#milestones">Milestones</a>
+      <a href="#log">Progress log</a>
     </nav>
   </div>
 </header>
 
 <main id="main" class="wrap">
   <section id="overview" class="hero">
-    <p class="eyebrow">Status as of <span id="auditDate"></span></p>
+    <p class="eyebrow">Last updated <span id="updated"></span> · audit baseline <span id="auditDate"></span></p>
     <h1>JKHPMC Official Website — Delivery Status</h1>
     <p class="lead">The visible website is built as a working prototype with <strong>sample content</strong>. The server side (database, logins, content management, forms that really send) has <strong>not been started</strong>. Nothing yet works with real data from end to end.</p>
     <div class="split">
@@ -89,6 +90,11 @@
     <h2 id="ms-h">Upcoming milestones</h2>
     <p class="sub">Dates are not shown because none have been agreed. Milestones are in recommended order.</p>
     <ol class="timeline" id="msList"></ol>
+  </section>
+  <section id="log" aria-labelledby="log-h">
+    <h2 id="log-h">Progress log (date-wise)</h2>
+    <p class="sub">What was implemented and verified on each date, newest first.</p>
+    <div class="table-wrap"><table><thead><tr><th>Date</th><th>Task</th><th>Priority</th><th>Status</th><th>What was done</th><th>Verification</th><th>Remaining</th></tr></thead><tbody id="logBody"></tbody></table></div>
   </section>
 </main>
 

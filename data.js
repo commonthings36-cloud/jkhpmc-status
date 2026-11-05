@@ -3,6 +3,7 @@
 
 window.STATUS = {
   auditDate: '2026-10-30',
+  updated: '2026-11-05',
   statuses: {
     done: 'Completed',
     progress: 'In Progress',
@@ -55,7 +56,7 @@ window.FRONTEND = [
     built: 'All pages render with sample content.', remains: 'Everything shown is sample or placeholder content ("[Demo]" titles and notices). Photos are stand-ins of unknown licence.' },
   { id: 'F-09', p: 'P1', status: 'progress', title: 'Tenders, corrigenda & documents screens',
     desc: 'Lists with filters by category, year and type; archive view; corrigenda; document table.',
-    built: 'Screens and filters work on sample records.', remains: 'Tenders do not move to the archive automatically; only one sample file can be downloaded. Needs real records and the server.' },
+    built: 'Screens and filters work on sample records. Tenders now move to the archive automatically when the closing date passes (status is worked out from dates, not typed in).', remains: 'Only one sample file can be downloaded. Needs real records, file storage and the server.' },
   { id: 'F-10', p: 'P1', status: 'progress', title: 'Mandi (market) rates dashboard',
     desc: 'Filters, search, sorting, trend chart, CSV download and print.',
     built: 'Everything works on generated sample figures labelled "NOT actual".', remains: 'No real rates, officer entry or history. Excel (.xlsx) and PDF downloads are not available (CSV opens in Excel; print works).' },
@@ -217,4 +218,22 @@ window.MILESTONES = [
   { id: 'BM4', title: 'Farmer services & grievances', status: 'pending', text: 'Farmer registration, applications, tracking, officer back-office, notifications and grievance handling.' },
   { id: 'BM5', title: 'News, map, search & AI assistant', status: 'pending', text: 'Managed news/gallery, collection-centre map, site search, chatbot, voice input and the website screens for them.' },
   { id: 'BM6', title: 'Extras & handover', status: 'pending', text: 'Visitor statistics, reports, rate alerts, social features, user testing, training and sign-off.' },
+];
+
+/* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
+window.HISTORY = [
+  { date: '2026-11-05', task: 'Automatic tender archive (F-09)', p: 'P1', status: 'progress',
+    what: 'A tender\'s Open / Upcoming / Closed status is now worked out from its published and closing dates instead of being typed in. After the closing date it moves to the archive by itself.',
+    verified: 'New date-rule check (6 cases) passes; full browser suite 129 of 129 passes.',
+    remaining: 'Tenders screen stays In Progress: real records, file storage and server data are still pending.' },
+  { date: '2026-11-05', task: 'Website moved into its own frontend folder', p: 'P0', status: 'done',
+    what: 'Project reorganised into frontend/ and a separate backend/ area to come. No behaviour changed.',
+    verified: 'Build, code-quality, language-parity and colour-contrast checks pass; browser suite 129 of 129 passes.',
+    remaining: 'Backend folder not created yet.' },
+  { date: '2026-11-05', task: 'Status page: last-updated date fixed', p: 'P0', status: 'done',
+    what: 'The page now shows the date it was last updated, separate from the 2026-10-30 audit baseline, and has this progress log.',
+    verified: 'Checked in the browser.', remaining: '' },
+  { date: '2026-10-30', task: 'Project audit & delivery status dashboard', p: 'P0', status: 'done',
+    what: 'Full audit of the prototype and backend roadmap; first version of this dashboard published.',
+    verified: 'Audit checks recorded on the Overview section.', remaining: '' },
 ];
