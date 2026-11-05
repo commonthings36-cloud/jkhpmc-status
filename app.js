@@ -10,7 +10,6 @@
   function badge(s) { return '<span class="badge s-' + s + '">' + ST[s] + '</span>'; }
   function tally(list) { var t = { done: 0, progress: 0, client: 0, pending: 0 }; list.forEach(function (f) { t[f.status]++; }); return t; }
 
-  $('auditDate').textContent = S.auditDate;
   $('updated').textContent = S.updated;
   $('auditDate2').textContent = S.auditDate;
 
@@ -26,7 +25,7 @@
 
   // checks
   S.checks.forEach(function (c) {
-    $('checks').appendChild(el('div', 'card check', '<span class="tick" aria-hidden="true">✓</span><div><b>' + esc(c[0]) + '</b><br>' + esc(c[1]) + '</div>'));
+    $('checks').appendChild(el('div', 'card check' + (c[2] ? ' warn' : ''), '<span class="tick" aria-hidden="true">' + (c[2] ? '!' : '✓') + '</span><div><b>' + esc(c[0]) + '</b><br>' + esc(c[1]) + '</div>'));
   });
 
   // priority cards
@@ -77,6 +76,7 @@
     var h = '<div class="fh"><span class="fid">' + f.id + '</span><span class="pchip p-' + f.p + '">' + f.p + '</span>' + badge(f.status) + '</div>' +
       '<h4>' + esc(f.title) + '</h4><p>' + esc(f.desc) + '</p>';
     if (layer === 'fe') h += '<dl class="bits"><dt>Built</dt><dd>' + esc(f.built) + '</dd><dt>Still to do</dt><dd>' + esc(f.remains) + '</dd></dl>';
+    if (layer === 'be' && f.note) h += '<dl class="bits"><dt>Verified / remaining</dt><dd>' + esc(f.note) + '</dd></dl>';
     if (f.needs) h += '<p class="needs"><b>Needs:</b> ' + esc(f.needs) + '</p>';
     c.innerHTML = h; return c;
   }

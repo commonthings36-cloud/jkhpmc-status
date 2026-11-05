@@ -95,3 +95,5 @@ th{background:#eef2f5}
   .timeline{padding-left:14px}.ms:before{left:-26px}
 }
 @media print{.top,.filters{display:none}.card,.ms{break-inside:avoid}}
+
+.check.warn .tick{background:var(--client-bg);color:var(--client)}

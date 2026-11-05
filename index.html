@@ -26,9 +26,9 @@
 
 <main id="main" class="wrap">
   <section id="overview" class="hero">
-    <p class="eyebrow">Last updated <span id="updated"></span> · audit baseline <span id="auditDate"></span></p>
+    <p class="eyebrow">Last updated <span id="updated"></span></p>
     <h1>JKHPMC Official Website — Delivery Status</h1>
-    <p class="lead">The visible website is built as a working prototype with <strong>sample content</strong>. The server side (database, logins, content management, forms that really send) has <strong>not been started</strong>. Nothing yet works with real data from end to end.</p>
+    <p class="lead">The website screens are built and tested, and still show <strong>sample content</strong>. The <strong>server foundation</strong> (database, secure staff sign-in with 2-step verification, roles and permissions, audit trail, and the tenders service) is now <strong>built and tested</strong>. Content management, document storage, working forms and most other server modules are <strong>not built yet</strong>, so nothing runs with real JKHPMC data end to end.</p>
     <div class="split">
       <div class="panel good"><h2>Frontend (what visitors see)</h2><p id="feSummary"></p><div id="feBar" class="stack" role="img"></div><ul class="legend" id="feLegend"></ul></div>
       <div class="panel warn"><h2>Backend (what makes it real)</h2><p id="beSummary"></p><div id="beBar" class="stack" role="img"></div><ul class="legend" id="beLegend"></ul></div>
@@ -37,9 +37,9 @@
   </section>
 
   <section aria-labelledby="chk">
-    <h2 id="chk">What has been checked on the frontend</h2>
+    <h2 id="chk">What has been checked</h2>
     <div class="grid checks" id="checks"></div>
-    <p class="note">These checks show the prototype is internally consistent. They do not confirm real data, the backend, WCAG 2.1 AA, GIGW or CERT-In compliance.</p>
+    <p class="note">These checks show the parts built so far work as intended. They do not confirm real JKHPMC data, WCAG 2.1 AA, GIGW or CERT-In compliance, or an independent security audit.</p>
   </section>
 
   <section aria-labelledby="prog">
@@ -69,7 +69,7 @@
   </section>
 
   <section id="backend" aria-labelledby="be-h">
-    <h2 id="be-h">Backend — server-side development <span class="tag be">Not started</span></h2>
+    <h2 id="be-h">Backend — server-side development <span class="tag be">Foundation built, features pending</span></h2>
     <p class="sub">Data storage, secure logins, content management, forms that really send, notifications and go-live operations. Go-live operations (hosting, backups, security and accessibility audits, handover) are shown as P1 because the SOW go-live criteria require them.</p>
     <div id="beList"></div>
   </section>
@@ -98,7 +98,7 @@
   </section>
 </main>
 
-<footer class="foot"><div class="wrap">Source: project audit &amp; backend roadmap, <span id="auditDate2"></span>. Every item and number on this page comes from that audit.</div></footer>
+<footer class="foot"><div class="wrap">Source: project audit &amp; backend roadmap (baseline <span id="auditDate2"></span>), updated with development work that has been verified, as recorded in the progress log. Counts are tallies of the items listed; nothing is shown as Completed without verification.</div></footer>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
