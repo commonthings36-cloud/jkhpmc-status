@@ -22,9 +22,9 @@ window.STATUS = {
     ['English / Hindi / Urdu text parity', '453 text items match across all 3 languages'],
     ['Colour-contrast check', 'All 13 listed colour pairs meet thresholds'],
     ['Automated browser test suite (website)', '134 of 134 checks passed'],
-    ['Backend automated tests (real PostgreSQL database)', '42 of 42 passed'],
+    ['Backend automated tests (real PostgreSQL database)', '54 of 54 passed'],
     ['Live backend end-to-end check (login + 2-step verification + logout)', '12 of 12 passed'],
-    ['Website connected to the live backend (checked in a real browser)', 'Tenders load from the server; error message with Try again shown when the server is down'],
+    ['Full-stack test: real browser + website + backend + database (repeatable, ./e2e.sh)', '22 of 22 passed: live tenders and archive, server-down and retry, feedback and contact forms in English/Hindi/Urdu stored and readable by staff, e-mail notice, privacy'],
     ['Home page speed, simulated slow-4G phone (Lighthouse 12.2.1, 3 runs)', 'Main content appears at 3.1 s (was 6.2 s); target is under 3 s - not yet met', 'warn'],
   ],
 };
@@ -72,7 +72,7 @@ window.FRONTEND = [
     built: 'Interface text only (F-03).', remains: 'Needs approved Hindi/Urdu content from JKHPMC. Existing Hindi/Urdu interface text has no record of fluent-reader review or JKHPMC approval.', needs: 'JKHPMC: approved translations' },
   { id: 'F-13', p: 'P1', status: 'progress', title: 'Government-required pages',
     desc: 'Templates for privacy, accessibility and other mandatory pages, a sitemap page and a feedback form.',
-    built: 'Templates exist; each page shows its own last-updated date and the footer date is worked out from them; feedback form validates input.', remains: 'Official policy text not supplied; the feedback form does not send anything until the server feedback service (B-114) is built.', needs: 'JKHPMC: official policy text' },
+    built: 'Templates exist; each page shows its own last-updated date and the footer date is worked out from them. The feedback form now sends to the server when connected: reference number shown, spam trap, clear error and retry.', remains: 'Official policy text not supplied; a live JKHPMC inbox address is needed for the staff notification e-mail.', needs: 'JKHPMC: official policy text' },
   { id: 'F-14', p: 'P1', status: 'pending', title: 'Formal accessibility & GIGW review',
     desc: 'Independent check against WCAG 2.1 AA and the government website guidelines (GIGW).',
     built: 'Basic checks only (contrast, headings, labels). No compliance claim is made.', remains: 'Manual and screen-reader audit; GIGW checklist with evidence.' },
@@ -82,7 +82,7 @@ window.FRONTEND = [
   // P2
   { id: 'F-16', p: 'P2', status: 'progress', title: 'Grievance, feedback & contact forms',
     desc: 'Forms with clear error messages, consent tick-box and keyboard-friendly error summary.',
-    built: 'Validation works (phone, email, minimum lengths).', remains: 'Submitting does nothing: no ticket number, storage, tracking or email. Attachment field is switched off. The form says so honestly.' },
+    built: 'Feedback and contact forms are complete end to end: they send to the server, show a reference number, handle errors and throttling, and staff can read what was sent. Validation works for all forms.', remains: 'The grievance form still sends nothing: no ticket number, routing, tracking or attachments (needs JKHPMC category-to-officer routing, B-208).' },
   { id: 'F-17', p: 'P2', status: 'progress', title: 'Schemes & farmer services pages',
     desc: 'Scheme details with eligibility, documents, procedure and a status lookup.',
     built: 'Pages work with sample text; lookup recognises 4 demo codes only.', remains: 'No registration, OTP, application, upload or real tracking.' },
@@ -137,7 +137,7 @@ window.BACKEND = [
   { id: 'B-111', p: 'P1', status: 'pending', title: 'Rates history & downloads', desc: 'Public history and trends; CSV, Excel and PDF downloads that display Hindi/Urdu correctly.' },
   { id: 'B-112', p: 'P1', status: 'client', title: 'Automatic rates feed', desc: 'Receive rates automatically from an external source.', needs: 'JKHPMC: specification of the data feed' },
   { id: 'B-113', p: 'P1', status: 'client', title: 'Policy pages & "last updated" dates', desc: 'Government-required pages served from the system, each showing its own approved date.', needs: 'JKHPMC: official text' },
-  { id: 'B-114', p: 'P1', status: 'pending', title: 'Feedback & contact handling', desc: 'Store submissions, block spam and email the official mailbox.', needs: 'Official mailbox' },
+  { id: 'B-114', p: 'P1', status: 'done', title: 'Feedback & contact handling', desc: 'Store submissions, block spam and email the official mailbox.', note: 'Verified: public feedback and contact services store messages with names and e-mail addresses encrypted; spam trap; throttling; staff with permission can read them and every read is audited; 11 backend tests plus the full-stack test (English, Hindi, Urdu). A live JKHPMC inbox address is still needed for notification e-mails.', needs: 'Official mailbox' },
   { id: 'B-115', p: 'P1', status: 'client', title: 'Existing content migration', desc: 'Bulk-import JKHPMC\'s existing content and documents with a trial run first.', needs: 'JKHPMC: source content' },
   // P2
   { id: 'B-201', p: 'P2', status: 'client', title: 'Farmer registration with mobile OTP', desc: 'Farmers register and sign in with a one-time code; consent is recorded.', needs: 'SMS account and TRAI DLT registration' },
@@ -217,7 +217,7 @@ window.MILESTONES = [
   { id: 'BM1', title: 'Foundation + secure documents & tenders', status: 'progress', recommended: true,
     text: 'All Foundation (P0) items, the content model, basic approval workflow, secure document storage, tenders with automatic archive, and a minimal admin area. Needs no external accounts or JKHPMC data. Progress: Foundation (P0) is built and tested except the automatic GitHub build/scan; the tenders service with approval workflow and automatic archive is built and tested. Still to build: content model, secure document storage, and the staff screens.',
     done: 'Staff log in with 2-step verification; an editor drafts a tender with corrigendum and attachment; an approver publishes it; the public Tenders page reads it from the server; after the closing date it moves to the archive automatically; every action is in the audit log.' },
-  { id: 'BM2', title: 'Complete content system & mandi rates', status: 'pending', text: 'Scheduled publishing, version history, full admin dashboard, tenders admin, rates entry/import and downloads, policy pages, feedback and contact.' },
+  { id: 'BM2', title: 'Complete content system & mandi rates', status: 'progress', text: 'Done so far: feedback and contact services (B-114). Still to build: scheduled publishing, version history, full admin dashboard, tenders admin, rates entry/import and downloads, policy pages, feedback and contact.' },
   { id: 'BM3', title: 'Go-live readiness', status: 'pending', text: 'Hosting, backups, monitoring, security testing, performance, accessibility audit and content migration. Go-live needs all High-priority items live and security findings closed.' },
   { id: 'BM4', title: 'Farmer services & grievances', status: 'pending', text: 'Farmer registration, applications, tracking, officer back-office, notifications and grievance handling.' },
   { id: 'BM5', title: 'News, map, search & AI assistant', status: 'pending', text: 'Managed news/gallery, collection-centre map, site search, chatbot, voice input and the website screens for them.' },
@@ -226,6 +226,10 @@ window.MILESTONES = [
 
 /* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
 window.HISTORY = [
+  { date: '2026-11-09', task: 'Feedback and contact forms working end to end, backend and website together (B-114, F-13, F-16)', p: 'P1', status: 'done',
+    what: 'Backend: public feedback and enquiry services with strict checking, spam trap, throttling, text clean-up, encrypted names and e-mail addresses, staff read access with audit, optional staff e-mail notice. Website: both forms send to the server when connected, show the reference number, keep what the visitor typed if something fails, and tell them to wait if throttled. Works in English, Hindi and Urdu.',
+    verified: '11 new backend tests (54 of 54 pass). New repeatable full-stack test with a real browser, website, backend and database: 22 of 22 pass, including Hindi and Urdu text stored and read back exactly, server errors, throttling and retry. Website browser suite 134 of 134 pass. A missing accessibility label on the spam-trap field was found by the suite and fixed.',
+    remaining: 'The grievance form is still not connected (needs JKHPMC routing details). A live JKHPMC inbox address is needed for staff notification e-mails. Staff screens to read messages are part of the admin dashboard (B-105); today they are read through the API.' },
   { date: '2026-11-05', task: 'Backend foundation: project, settings, database, API standards (B-001 to B-004)', p: 'P0', status: 'progress',
     what: 'New separate backend folder (Spring Boot + PostgreSQL). Server refuses to start with missing settings; database built by migrations with only the 8 roles pre-loaded; standard API structure, error format with request id and translation key, API description file; one command builds and starts everything.',
     verified: 'Started from a clean state with one command and health-checked; database built from empty in the tests; 42 automated tests pass.',
