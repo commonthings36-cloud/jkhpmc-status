@@ -97,3 +97,9 @@ th{background:#eef2f5}
 @media print{.top,.filters{display:none}.card,.ms{break-inside:avoid}}
 
 .check.warn .tick{background:var(--client-bg);color:var(--client)}
+
+.badge.deferred{background:#ece4f7;color:#5b3a8c}
+.s-deferred{background:#7b57b3;color:#fff}
+.is-deferred{background-image:repeating-linear-gradient(135deg,transparent 0 10px,#f4effb 10px 20px)}
+.defer-note{background:#ece4f7;border-radius:8px;padding:6px 10px;font-size:.88rem!important;color:#3f2a66}
+.note.defer{background:#ece4f7;color:#3f2a66;border-radius:8px;padding:8px 12px}

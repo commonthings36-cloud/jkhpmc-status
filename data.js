@@ -3,7 +3,8 @@
 
 window.STATUS = {
   auditDate: '2026-10-30',
-  updated: '2026-11-05',
+  updated: '2026-11-10',
+  deferredNote: 'Mandi (market) rates are on hold. They will be taken up after a long time and are not being built now. Items marked Deferred show only what had already been done, if anything.',
   statuses: {
     done: 'Completed',
     progress: 'In Progress',
@@ -61,7 +62,7 @@ window.FRONTEND = [
   { id: 'F-09', p: 'P1', status: 'progress', title: 'Tenders, corrigenda & documents screens',
     desc: 'Lists with filters by category, year and type; archive view; corrigenda; document table.',
     built: 'Screens and filters work. Tenders move to the archive automatically when the closing date passes. When connected to the server the list comes from the live database, with a friendly error and Try again if the server is unavailable.', remains: 'Real JKHPMC records are not loaded yet; file downloads need document storage (only one sample file exists); the Documents tab is still sample data.' },
-  { id: 'F-10', p: 'P1', status: 'progress', title: 'Mandi (market) rates dashboard',
+  { id: 'F-10', p: 'P1', status: 'progress', deferred: true, title: 'Mandi (market) rates dashboard',
     desc: 'Filters, search, sorting, trend chart, CSV download and print.',
     built: 'Everything works on generated sample figures labelled "NOT actual". Downloads: CSV and a real Excel (.xlsx) file; print works (Save as PDF from the print dialog).', remains: 'No real rates, officer entry or history. A generated PDF with correct Hindi/Urdu text comes with the server (B-111).' },
   { id: 'F-11', p: 'P1', status: 'client', title: 'Official logo, images, text & approved translations',
@@ -133,9 +134,9 @@ window.BACKEND = [
   { id: 'B-107', p: 'P1', status: 'progress', title: 'Tenders system & automatic archive', desc: 'Tenders, corrigenda and attachments; tenders move to the archive by themselves after the closing date.', note: 'Built and tested: tenders, corrigenda, approval workflow, automatic archive after the closing date. Remaining: file attachments and downloads (B-106), staff screens (B-108), real tender data.' },
   { id: 'B-108', p: 'P1', status: 'pending', title: 'Tenders admin screens', desc: 'Tender officers create tenders and corrigenda; approvers publish.' },
   { id: 'B-109', p: 'P1', status: 'pending', title: 'Document repository', desc: 'Acts, Rules, Circulars, Orders, Forms and Guidelines with year/category filters and admin upload.', needs: 'Real documents' },
-  { id: 'B-110', p: 'P1', status: 'pending', title: 'Mandi rates entry & import', desc: 'Daily entry form and bulk spreadsheet import with checks, duplicate blocking and a change history.', needs: 'Commodity and market lists from JKHPMC' },
-  { id: 'B-111', p: 'P1', status: 'pending', title: 'Rates history & downloads', desc: 'Public history and trends; CSV, Excel and PDF downloads that display Hindi/Urdu correctly.' },
-  { id: 'B-112', p: 'P1', status: 'client', title: 'Automatic rates feed', desc: 'Receive rates automatically from an external source.', needs: 'JKHPMC: specification of the data feed' },
+  { id: 'B-110', p: 'P1', status: 'pending', deferred: true, title: 'Mandi rates entry & import', desc: 'Daily entry form and bulk spreadsheet import with checks, duplicate blocking and a change history.', needs: 'Commodity and market lists from JKHPMC' },
+  { id: 'B-111', p: 'P1', status: 'pending', deferred: true, title: 'Rates history & downloads', desc: 'Public history and trends; CSV, Excel and PDF downloads that display Hindi/Urdu correctly.' },
+  { id: 'B-112', p: 'P1', status: 'client', deferred: true, title: 'Automatic rates feed', desc: 'Receive rates automatically from an external source.', needs: 'JKHPMC: specification of the data feed' },
   { id: 'B-113', p: 'P1', status: 'client', title: 'Policy pages & "last updated" dates', desc: 'Government-required pages served from the system, each showing its own approved date.', needs: 'JKHPMC: official text' },
   { id: 'B-114', p: 'P1', status: 'done', title: 'Feedback & contact handling', desc: 'Store submissions, block spam and email the official mailbox.', note: 'Verified: public feedback and contact services store messages with names and e-mail addresses encrypted; spam trap; throttling; staff with permission can read them and every read is audited; 11 backend tests plus the full-stack test (English, Hindi, Urdu). A live JKHPMC inbox address is still needed for notification e-mails.', needs: 'Official mailbox' },
   { id: 'B-115', p: 'P1', status: 'client', title: 'Existing content migration', desc: 'Bulk-import JKHPMC\'s existing content and documents with a trial run first.', needs: 'JKHPMC: source content' },
@@ -158,7 +159,7 @@ window.BACKEND = [
   // P3
   { id: 'B-301', p: 'P3', status: 'pending', title: 'Visitor statistics', desc: 'Privacy-friendly counts by page and language; no raw IP addresses stored.', needs: 'Privacy decision' },
   { id: 'B-302', p: 'P3', status: 'pending', title: 'Operational reports', desc: 'Applications by stage, grievance deadlines, rate-update compliance; CSV/PDF.', needs: 'List of reports wanted' },
-  { id: 'B-303', p: 'P3', status: 'client', title: 'Rate alerts (SMS / WhatsApp)', desc: 'Farmers subscribe to price alerts and can unsubscribe.', needs: 'WhatsApp Business approval; registered SMS templates' },
+  { id: 'B-303', p: 'P3', status: 'client', deferred: true, title: 'Rate alerts (SMS / WhatsApp)', desc: 'Farmers subscribe to price alerts and can unsubscribe.', needs: 'WhatsApp Business approval; registered SMS templates' },
   { id: 'B-304', p: 'P3', status: 'client', title: 'Social sharing & feeds (server side)', desc: 'Share links valid in all three languages; social feed embeds.', needs: 'Social media access tokens' },
   // Operations (needed for go-live) – priority P1 since required for go-live per SOW
   { id: 'B-401', p: 'P1', status: 'client', title: 'Hosting, domain, SSL & automatic deployment', desc: 'Set up hosting, Cloudflare, secure certificates and test/live environments.', needs: 'JKHPMC: hosting option and domain authorisation', ops: true },
@@ -217,15 +218,23 @@ window.MILESTONES = [
   { id: 'BM1', title: 'Foundation + secure documents & tenders', status: 'progress', recommended: true,
     text: 'All Foundation (P0) items, the content model, basic approval workflow, secure document storage, tenders with automatic archive, and a minimal admin area. Needs no external accounts or JKHPMC data. Progress: Foundation (P0) is built and tested except the automatic GitHub build/scan; the tenders service with approval workflow and automatic archive is built and tested. Still to build: content model, secure document storage, and the staff screens.',
     done: 'Staff log in with 2-step verification; an editor drafts a tender with corrigendum and attachment; an approver publishes it; the public Tenders page reads it from the server; after the closing date it moves to the archive automatically; every action is in the audit log.' },
-  { id: 'BM2', title: 'Complete content system & mandi rates', status: 'progress', text: 'Done so far: feedback and contact services (B-114). Still to build: scheduled publishing, version history, full admin dashboard, tenders admin, rates entry/import and downloads, policy pages, feedback and contact.' },
+  { id: 'BM2', title: 'Complete content system (mandi rates deferred)', status: 'progress', text: 'Done so far: feedback and contact services (B-114). Still to build: scheduled publishing, version history, full admin dashboard, tenders admin, policy pages. Mandi rates (entry, import, downloads) are deferred and are not part of this milestone.' },
   { id: 'BM3', title: 'Go-live readiness', status: 'pending', text: 'Hosting, backups, monitoring, security testing, performance, accessibility audit and content migration. Go-live needs all High-priority items live and security findings closed.' },
   { id: 'BM4', title: 'Farmer services & grievances', status: 'pending', text: 'Farmer registration, applications, tracking, officer back-office, notifications and grievance handling.' },
   { id: 'BM5', title: 'News, map, search & AI assistant', status: 'pending', text: 'Managed news/gallery, collection-centre map, site search, chatbot, voice input and the website screens for them.' },
-  { id: 'BM6', title: 'Extras & handover', status: 'pending', text: 'Visitor statistics, reports, rate alerts, social features, user testing, training and sign-off.' },
+  { id: 'BM6', title: 'Extras & handover', status: 'pending', text: 'Visitor statistics, reports, social features, user testing, training and sign-off. (Rate alerts belong to the deferred mandi-rates work.)' },
 ];
 
 /* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
 window.HISTORY = [
+  { date: '2026-11-10', task: 'Mandi (market) rates put on hold', p: 'P1', status: 'progress',
+    what: 'On the client\'s instruction, the mandi rates work is deferred: it will be taken up after a long time. Nothing more is being built for it now. What exists from earlier is kept as it is: the sample-data rates screen with CSV, Excel and print. The server parts (rates entry and import, history and downloads, automatic rates feed, rate alerts) are not started and are marked Deferred.',
+    verified: 'Existing sample-data rates screen still passes its browser checks (134 of 134).',
+    remaining: 'All real mandi-rates work: deferred until further notice.' },
+  { date: '2026-11-10', task: 'Website, backend, status page and tests made independent folders', p: 'P0', status: 'done',
+    what: 'Each folder now stands alone with its own instructions, settings, tests and automatic-check file, so any folder can be moved or copied elsewhere and still work. The one test that combines website and backend has its own folder. Fixed along the way: the Docker network name no longer depends on the folder name, the test database is now created automatically on a new machine, and the website no longer refers to the backend folder.',
+    verified: 'Each folder was copied to a different location under a different name and run from there: website lint, checks, build and browser suite 134 of 134; backend 57 of 57 tests on a brand-new database; combined website + backend test 22 of 22; status page renders. The first attempt failed on the missing test database; fixed and re-run.',
+    remaining: 'The automatic GitHub checks inside each folder have not run on GitHub yet.' },
   { date: '2026-11-10', task: 'Interactive API page (Swagger) for developers and reviewers', p: 'P0', status: 'done',
     what: 'The backend now has a Swagger page that lists all 26 API endpoints with descriptions and lets a developer try the public ones. It is a development aid: switched off by default and kept off in production.',
     verified: '3 new backend tests (57 of 57 pass): page does not exist unless switched on; when on it loads, loads its settings, and the API keeps its strict security policy. Checked in a real browser.',

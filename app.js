@@ -8,14 +8,16 @@
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function badge(s) { return '<span class="badge s-' + s + '">' + ST[s] + '</span>'; }
+  function deferred(list) { return list.filter(function (f) { return f.deferred; }).length; }
   function tally(list) { var t = { done: 0, progress: 0, client: 0, pending: 0 }; list.forEach(function (f) { t[f.status]++; }); return t; }
 
   $('updated').textContent = S.updated;
   $('auditDate2').textContent = S.auditDate;
+  $('deferNote').textContent = S.deferredNote;
 
   function summary(listEl, barEl, textEl, list, label) {
     var t = tally(list), n = list.length;
-    textEl.textContent = n + ' items: ' + t.done + ' completed, ' + t.progress + ' in progress, ' + t.client + ' waiting on JKHPMC, ' + t.pending + ' pending.';
+    textEl.textContent = n + ' items: ' + t.done + ' completed, ' + t.progress + ' in progress, ' + t.client + ' waiting on JKHPMC, ' + t.pending + ' pending.' + (deferred(list) ? ' On hold (mandi rates): ' + deferred(list) + '.' : '');
     barEl.setAttribute('aria-label', label + ' items by status');
     barEl.innerHTML = ORDER.map(function (s) { return t[s] ? '<span class="seg s-' + s + '" style="flex:' + t[s] + '" title="' + ST[s] + ': ' + t[s] + '"></span>' : ''; }).join('');
     listEl.innerHTML = ORDER.map(function (s) { return '<li><i class="dot s-' + s + '"></i>' + ST[s] + ' <b>' + t[s] + '</b></li>'; }).join('');
@@ -58,25 +60,27 @@
     });
   }
   chips($('fp'), [['all', 'All']].concat(PR.map(function (p) { return [p, p + ' ' + S.priorities[p].name]; })), 'p');
-  chips($('fs'), [['all', 'All']].concat(ORDER.map(function (s) { return [s, ST[s], 's-' + s]; })), 's');
+  chips($('fs'), [['all', 'All']].concat(ORDER.map(function (s) { return [s, ST[s], 's-' + s]; })).concat([['deferred', 'Deferred (on hold)', 's-deferred']]), 's');
   $('q').addEventListener('input', function (e) { state.q = e.target.value.trim().toLowerCase(); render(); });
 
   function match(f) {
     if (state.p !== 'all' && f.p !== state.p) return false;
-    if (state.s !== 'all' && f.status !== state.s) return false;
+    if (state.s === 'deferred') { if (!f.deferred) return false; }
+    else if (state.s !== 'all' && f.status !== state.s) return false;
     if (state.q) {
-      var hay = [f.id, f.title, f.desc, f.built, f.remains, f.needs, ST[f.status]].join(' ').toLowerCase();
+      var hay = [f.id, f.title, f.desc, f.built, f.remains, f.needs, ST[f.status], f.deferred ? 'deferred on hold' : ''].join(' ').toLowerCase();
       if (hay.indexOf(state.q) < 0) return false;
     }
     return true;
   }
 
   function card(f, layer) {
-    var c = el('article', 'card feat s-border-' + f.status);
-    var h = '<div class="fh"><span class="fid">' + f.id + '</span><span class="pchip p-' + f.p + '">' + f.p + '</span>' + badge(f.status) + '</div>' +
+    var c = el('article', 'card feat s-border-' + f.status + (f.deferred ? ' is-deferred' : ''));
+    var h = '<div class="fh"><span class="fid">' + f.id + '</span><span class="pchip p-' + f.p + '">' + f.p + '</span>' + badge(f.status) + (f.deferred ? '<span class="badge deferred">Deferred</span>' : '') + '</div>' +
       '<h4>' + esc(f.title) + '</h4><p>' + esc(f.desc) + '</p>';
     if (layer === 'fe') h += '<dl class="bits"><dt>Built</dt><dd>' + esc(f.built) + '</dd><dt>Still to do</dt><dd>' + esc(f.remains) + '</dd></dl>';
     if (layer === 'be' && f.note) h += '<dl class="bits"><dt>Verified / remaining</dt><dd>' + esc(f.note) + '</dd></dl>';
+    if (f.deferred) h += '<p class="defer-note"><b>On hold:</b> will be built after a long time. Not being worked on now.</p>';
     if (f.needs) h += '<p class="needs"><b>Needs:</b> ' + esc(f.needs) + '</p>';
     c.innerHTML = h; return c;
   }
