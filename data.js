@@ -22,7 +22,7 @@ window.STATUS = {
     ['English / Hindi / Urdu text parity', '453 text items match across all 3 languages'],
     ['Colour-contrast check', 'All 13 listed colour pairs meet thresholds'],
     ['Automated browser test suite (website)', '134 of 134 checks passed'],
-    ['Backend automated tests (real PostgreSQL database)', '54 of 54 passed'],
+    ['Backend automated tests (real PostgreSQL database)', '57 of 57 passed'],
     ['Live backend end-to-end check (login + 2-step verification + logout)', '12 of 12 passed'],
     ['Full-stack test: real browser + website + backend + database (repeatable, ./e2e.sh)', '22 of 22 passed: live tenders and archive, server-down and retry, feedback and contact forms in English/Hindi/Urdu stored and readable by staff, e-mail notice, privacy'],
     ['Home page speed, simulated slow-4G phone (Lighthouse 12.2.1, 3 runs)', 'Main content appears at 3.1 s (was 6.2 s); target is under 3 s - not yet met', 'warn'],
@@ -226,6 +226,10 @@ window.MILESTONES = [
 
 /* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
 window.HISTORY = [
+  { date: '2026-11-10', task: 'Interactive API page (Swagger) for developers and reviewers', p: 'P0', status: 'done',
+    what: 'The backend now has a Swagger page that lists all 26 API endpoints with descriptions and lets a developer try the public ones. It is a development aid: switched off by default and kept off in production.',
+    verified: '3 new backend tests (57 of 57 pass): page does not exist unless switched on; when on it loads, loads its settings, and the API keeps its strict security policy. Checked in a real browser.',
+    remaining: 'Staff screens (admin dashboard) are still to be built.' },
   { date: '2026-11-09', task: 'Feedback and contact forms working end to end, backend and website together (B-114, F-13, F-16)', p: 'P1', status: 'done',
     what: 'Backend: public feedback and enquiry services with strict checking, spam trap, throttling, text clean-up, encrypted names and e-mail addresses, staff read access with audit, optional staff e-mail notice. Website: both forms send to the server when connected, show the reference number, keep what the visitor typed if something fails, and tell them to wait if throttled. Works in English, Hindi and Urdu.',
     verified: '11 new backend tests (54 of 54 pass). New repeatable full-stack test with a real browser, website, backend and database: 22 of 22 pass, including Hindi and Urdu text stored and read back exactly, server errors, throttling and retry. Website browser suite 134 of 134 pass. A missing accessibility label on the spam-trap field was found by the suite and fixed.',
