@@ -103,3 +103,21 @@ th{background:#eef2f5}
 .is-deferred{background-image:repeating-linear-gradient(135deg,transparent 0 10px,#f4effb 10px 20px)}
 .defer-note{background:#ece4f7;border-radius:8px;padding:6px 10px;font-size:.88rem!important;color:#3f2a66}
 .note.defer{background:#ece4f7;color:#3f2a66;border-radius:8px;padding:8px 12px}
+
+/* ---- spotlight ---- */
+.spot{margin-top:28px;border-radius:20px;padding:clamp(20px,4vw,34px);color:#fff;background:linear-gradient(135deg,#0e3f23,#166534 60%,#1b7f4b);box-shadow:0 10px 40px rgba(14,63,35,.25)}
+.spot h2{color:#fff;margin:0;font-size:clamp(1.5rem,3vw,2.1rem)}.spot h3{color:#fff;margin:26px 0 10px;font-size:1.05rem;text-transform:uppercase;letter-spacing:.07em;opacity:.85}
+.spot__top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.spot__badge{background:#f2a900;color:#3d2a00;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;padding:5px 12px;border-radius:99px}
+.spot__lead{font-size:1.08rem;max-width:62rem;opacity:.95;margin-top:12px}
+.spot__facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+.spot__fact{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px 16px}
+.spot__fact b{display:block;font-size:2.3rem;line-height:1;color:#ffd466}.spot__fact span{font-size:.9rem;opacity:.92}
+.spot__points{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px 22px}
+.spot__points li{display:flex;gap:12px;align-items:flex-start}.spot__points b{display:block}.spot__points div span{display:block;font-size:.93rem;opacity:.9}
+.spot__tick{display:grid;place-items:center;width:26px;height:26px;flex:none;border-radius:50%;background:#f2a900;color:#3d2a00;font-weight:800;margin-top:2px}
+.spot__gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;align-items:start}
+.spot__shot{margin:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:8px}
+.spot__shot img{display:block;width:100%;height:auto;border-radius:9px;background:#fff}
+.spot__shot--phone{max-width:240px}.spot__shot figcaption{font-size:.85rem;padding:8px 4px 2px;opacity:.9}
+.spot .note{color:#d6ecde}

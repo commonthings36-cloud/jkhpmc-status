@@ -25,6 +25,17 @@
   summary($('feLegend'), $('feBar'), $('feSummary'), FE, 'Frontend');
   summary($('beLegend'), $('beBar'), $('beSummary'), BE, 'Backend');
 
+  // spotlight (staff dashboard)
+  (function () {
+    var sp = window.SPOTLIGHT; if (!sp) return;
+    $('spotBadge').textContent = sp.badge; $('spot-h').textContent = sp.title; $('spotLead').textContent = sp.lead; $('spotNote').textContent = sp.note;
+    sp.facts.forEach(function (f) { $('spotFacts').appendChild(el('div', 'spot__fact', '<b>' + esc(f[0]) + '</b><span>' + esc(f[1]) + '</span>')); });
+    sp.points.forEach(function (p) { $('spotPoints').appendChild(el('li', null, '<span class="spot__tick" aria-hidden="true">✓</span><div><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></div>')); });
+    sp.gallery.forEach(function (g) {
+      $('spotGallery').appendChild(el('figure', 'spot__shot spot__shot--' + g[2], '<a href="' + g[0] + '" target="_blank" rel="noopener"><img src="' + g[0] + '" alt="' + esc(g[1]) + '" loading="lazy"></a><figcaption>' + esc(g[1]) + '</figcaption>'));
+    });
+  })();
+
   // checks
   S.checks.forEach(function (c) {
     $('checks').appendChild(el('div', 'card check' + (c[2] ? ' warn' : ''), '<span class="tick" aria-hidden="true">' + (c[2] ? '!' : '✓') + '</span><div><b>' + esc(c[0]) + '</b><br>' + esc(c[1]) + '</div>'));

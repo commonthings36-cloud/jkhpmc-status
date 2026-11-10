@@ -229,6 +229,10 @@ window.MILESTONES = [
 
 /* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
 window.HISTORY = [
+  { date: '2026-11-10', task: 'Staff dashboard redesign: new sign-in page and new look throughout', p: 'P1', status: 'progress',
+    what: 'A completely new design for the staff dashboard: a split-screen sign-in page with photography, branding and feature highlights; a sidebar with icons; a welcome banner with colour-coded count cards; colour-striped tender cards; cleaner tables and forms; password show/hide; a slide-out menu on phones; a favicon and page title.',
+    verified: 'Screenshots checked on laptop and phone. All automatic browser tests still pass after the redesign: 35 of 35 (real two-step), 8 of 8 (demonstration mode) and 23 of 23 (public website). Only one test needed a change, because the sign-in heading wording changed.',
+    remaining: 'Content editor screens for pages and news, and document upload, still to come.' },
   { date: '2026-11-10', task: 'Demonstration mode: two-step code can be switched off for demos and testing', p: 'P0', status: 'done',
     what: 'On request, the demo no longer asks for the 6-digit code: staff sign in with a password only. This is a demonstration switch, off by default. Two-step verification stays mandatory for all real use, and the server refuses to start with it switched off when secure (real) cookie settings are used. The staff sign-in page shows a clear "Demonstration mode" notice. A demo can still show the real two-step login with one option.',
     verified: '8 new backend tests (65 of 65 pass) including: the server refuses to start with two-step off on a secure setup; by default two-step is required; every sign-in without two-step is recorded in the audit log. New full-stack test of demonstration mode: 8 of 8 pass. The real two-step full-stack test (35 of 35) and website test (23 of 23) are unchanged and pass. Demo logins for officer, approver and administrator checked in a browser.',
@@ -299,3 +303,35 @@ window.HISTORY = [
     what: 'Full audit of the prototype and backend roadmap; first version of this dashboard published.',
     verified: 'Audit checks recorded on the Overview section.', remaining: '' },
 ];
+
+/* Highlight panel for the staff dashboard. Every number here is a count of real, verified things. */
+window.SPOTLIGHT = {
+  badge: 'Spotlight',
+  title: 'The Staff Dashboard',
+  lead: 'A very large amount of work has gone into the staff dashboard, and it is now the most complete part of the project. It is a separate, polished application that lets JKHPMC staff run the website day to day. It has been designed, built, redesigned and tested end to end, from a real browser all the way down to the database.',
+  facts: [
+    ['9', 'screens built, from sign-in to the audit log'],
+    ['43', 'automatic browser checks that use it like a real person (35 + 8)'],
+    ['3', 'staff roles tested end to end: administrator, approver, tender officer'],
+    ['2', 'layouts: laptop and phone'],
+  ],
+  points: [
+    ['Secure sign-in', 'Two-step verification with a QR code set-up, password reset by e-mail, and lock-out after repeated wrong passwords.'],
+    ['Tender management', 'Create tenders, add corrigenda, send for approval, approve or reject with a reason. Approved tenders appear on the public website straight away, and nobody can approve their own tender.'],
+    ['Visitor messages', 'Feedback and enquiries in English, Hindi and Urdu, with names and e-mail addresses stored encrypted. Every time they are opened it is recorded.'],
+    ['Users and roles', 'Add staff, change roles, deactivate. A deactivated person is signed out at once, everywhere.'],
+    ['Audit log', 'A permanent, filterable record of every important action. Entries cannot be edited or deleted.'],
+    ['Role-based screens', 'Each role sees only the menu and buttons it is allowed. The server enforces the same rules again, so hiding a button is never the only protection.'],
+    ['Brand-new design', 'Split-screen sign-in with photography and branding, sidebar navigation with icons, colour-coded status cards, and a phone-friendly menu.'],
+    ['Easy to demonstrate', 'One command starts everything with sample data and ready-made logins, plus a step-by-step demo guide.'],
+  ],
+  gallery: [
+    ['img/login-desktop.jpg', 'Sign-in page', 'desktop'],
+    ['img/overview-desktop.jpg', 'Overview with live counts', 'desktop'],
+    ['img/tenders-desktop.jpg', 'Tender approval workflow', 'desktop'],
+    ['img/messages-desktop.jpg', 'Visitor messages (Hindi shown)', 'desktop'],
+    ['img/login-phone.jpg', 'Sign-in on a phone', 'phone'],
+    ['img/menu-phone.jpg', 'Phone menu', 'phone'],
+  ],
+  note: 'Screenshots use demonstration data only.',
+};
