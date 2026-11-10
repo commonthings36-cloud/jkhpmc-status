@@ -23,7 +23,8 @@ window.STATUS = {
     ['English / Hindi / Urdu text parity', '453 text items match across all 3 languages'],
     ['Colour-contrast check', 'All 13 listed colour pairs meet thresholds'],
     ['Automated browser test suite (website)', '134 of 134 checks passed'],
-    ['Backend automated tests (real PostgreSQL database)', '57 of 57 passed'],
+    ['Backend automated tests (real PostgreSQL database)', '65 of 65 passed'],
+    ['Full-stack test, demonstration mode (two-step switched off, demo only)', '8 of 8 passed: password-only sign-in works, wrong password still refused, roles still apply, the audit log records that two-step was off, notice shown on the sign-in page'],
     ['Live backend end-to-end check (login + 2-step verification + logout)', '12 of 12 passed'],
     ['Full-stack test, public website: real browser + website + backend + database (repeatable: e2e folder)', '23 of 23 passed: live tenders and archive, server-down and retry, feedback and contact forms in English/Hindi/Urdu stored and readable by staff, e-mail notice, privacy'],
     ['Full-stack test, staff dashboard: real browser + dashboard + backend + database (repeatable: e2e folder)', '35 of 35 passed: sign-in and 2-step set-up, users and roles, officer-to-approver tender workflow, visitor messages in Hindi/Urdu, audit log, deactivation, password reset by e-mail'],
@@ -228,6 +229,10 @@ window.MILESTONES = [
 
 /* Date-wise development log. Add newest first. Only list work that has been implemented AND verified. */
 window.HISTORY = [
+  { date: '2026-11-10', task: 'Demonstration mode: two-step code can be switched off for demos and testing', p: 'P0', status: 'done',
+    what: 'On request, the demo no longer asks for the 6-digit code: staff sign in with a password only. This is a demonstration switch, off by default. Two-step verification stays mandatory for all real use, and the server refuses to start with it switched off when secure (real) cookie settings are used. The staff sign-in page shows a clear "Demonstration mode" notice. A demo can still show the real two-step login with one option.',
+    verified: '8 new backend tests (65 of 65 pass) including: the server refuses to start with two-step off on a secure setup; by default two-step is required; every sign-in without two-step is recorded in the audit log. New full-stack test of demonstration mode: 8 of 8 pass. The real two-step full-stack test (35 of 35) and website test (23 of 23) are unchanged and pass. Demo logins for officer, approver and administrator checked in a browser.',
+    remaining: 'Before going live, confirm the live server has the default (two-step on).' },
   { date: '2026-11-10', task: 'Staff dashboard built (own folder), with full browser testing', p: 'P1', status: 'progress',
     what: 'A separate staff dashboard: sign-in with two-step verification (QR code set-up), overview with counts, tenders (create, add corrigendum, send for approval, approve or reject with a reason), visitor feedback and enquiries, users and roles (add, change roles, deactivate), audit log, and password reset by e-mail. Every role sees only the menu and buttons it is allowed; the server enforces the same rules.',
     verified: 'New repeatable test with a real browser, the dashboard, the backend and the database: 35 of 35 checks pass (officer to approver workflow, nobody approves their own tender, Hindi and Urdu messages, deactivated user signed out at once, reset e-mail, audit log). Website-with-backend test now 23 of 23. Copied to a different folder name and re-run: still passes. While building the test, three mistakes in the test itself were found and fixed (none in the product).',
